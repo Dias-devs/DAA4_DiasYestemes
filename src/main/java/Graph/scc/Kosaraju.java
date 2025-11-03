@@ -83,7 +83,7 @@ public class Kosaraju {
 
         for (Edge e : graph.neighbors(u)) {
             metrics.addDfsEdges(1);
-            int v = e.v();
+            int v = e.getV();
             if (!visited[v]) dfs1(v, visited, order);
         }
 
@@ -101,7 +101,7 @@ public class Kosaraju {
 
         for (Edge e : gt.neighbors(u)) {
             metrics.addDfsEdges(1);
-            int v = e.v();
+            int v = e.getV();
             if (!visited[v]) dfs2(gt, v, visited, component);
         }
     }
@@ -113,7 +113,7 @@ public class Kosaraju {
         Graph gt = new Graph(n);
         for (int u = 0; u < n; u++) {
             for (Edge e : graph.neighbors(u)) {
-                gt.addEdge(e.v(), e.u(), e.w());
+                gt.addEdge(e.getV(), e.getU(), e.getW());
             }
         }
         return gt;
