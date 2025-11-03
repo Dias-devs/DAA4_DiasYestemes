@@ -10,6 +10,8 @@ import Graph.core.Graph;
 import Graph.util.Metrics;
 import Graph.util.MetricsInterface;
 
+import java.util.Map;
+
 
 public class Demo {
     public static void main(String[] args) {
@@ -42,7 +44,10 @@ public class Demo {
 
         // DAG Shortest Path
         DAGShortestPath sp = new DAGShortestPath(cond.dag(), m);
-        System.out.println("Shortest Distances: " + sp.shortestDistances(0));
+        Map<Integer, Long> dist = sp.shortestDistances(0);
+        dist.replaceAll((k, v) -> v >= Long.MAX_VALUE / 8 ? null : v);
+        System.out.println("Shortest Distances:");
+        dist.forEach((k, v) -> System.out.println("  " + k + " = " + (v == null ? "∞" : v)));
 
         // DAG Longest Path
         DAGLongestPath lp = new DAGLongestPath(cond.dag(), m);
